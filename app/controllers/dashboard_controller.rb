@@ -16,7 +16,6 @@ class DashboardController < ApplicationController
     @project = Project.find(params[:id])
   end
 
-
   def create
 
     start_time = DateTime.parse("#{params[:project][:start_date]} #{params[:project][:start_hour]}")
