@@ -61,5 +61,10 @@
         <h5><%= @submissions.size %></h5>
       </div>
     </div>
+    <div class="row">
+      <div class="input-field col s12 center-align">
+        <button class="waves-effect waves-light btn" onclick="location.href='/dashboard/delete?id=<%= @project.id %>';" >Remover</button>
+      </div>
+    </div>
   </div>
 </main>

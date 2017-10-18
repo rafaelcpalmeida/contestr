@@ -30,4 +30,10 @@ class DashboardController < ApplicationController
       redirect_to '/dashboard'
     end
   end
+
+  def delete
+    Project.find(params[:id]).destroy
+    Submission.where(project_id: params[:id]).destroy_all
+    redirect_to '/dashboard'
+  end
 end

@@ -14,5 +14,9 @@ Rails.application.routes.draw do
 
   get '/dashboard/info' => 'dashboard#info'
 
+  get '/dashboard/delete' => 'dashboard#delete'
+
   post '/dashboard/create' => 'dashboard#create'
+
+
 end
