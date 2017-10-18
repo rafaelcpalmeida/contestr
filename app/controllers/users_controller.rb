@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  layout 'application'
+  layout 'welcome'
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :userType)
