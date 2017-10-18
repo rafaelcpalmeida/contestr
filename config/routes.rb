@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   post '/users' => 'users#create'
 
   get '/dashboard' => 'dashboard#index'
+  get '/dashboard/new' => 'dashboard#new'
+
+  post '/dashboard/create' => 'dashboard#create'
 end

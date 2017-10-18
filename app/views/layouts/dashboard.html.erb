@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contestr</title>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <%= stylesheet_link_tag ('dashboard.css') %>
+  <%= stylesheet_link_tag    "https://fonts.googleapis.com/icon?family=Material+Icons", "https://fonts.googleapis.com/css?family=Ubuntu:400,700italic,700,500italic,500,400italic,300,300italic", "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" %>
+  <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js" %>
+</head>
+
+<body>
+<header>
+  <nav class="light-blue lighten-1">
+    <div class="nav-wrapper">
+      <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"></a>
+      <span id="logo-container" class="brand-logo">&nbsp;&nbsp;Logo</span>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/logout">Sair</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <ul id="nav-mobile" class="side-nav custom-side-nav fixed" style="width: 240px;">
+    <li class="grey darken-4">
+      <div class="user">
+        <div class="chip grey darken-3 white-text">
+          <%= current_user.name %>
+        </div>
+      </div>
+    </li>
+    <li>
+      <a class="grey white-text darken-3 waves-effect waves-grey">
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a href="/dashboard/new" class="waves-effect waves-grey">
+        <span>Create New</span>
+      </a>
+    </li>
+    <li><a class="hide-on-large-only" href="/logout">Sair</a></li>
+  </ul>
+</header>
+
+<%= yield %>
+
+<%= javascript_include_tag('dashboard.js') %>
+<footer class="page-footer orange">
+  <div class="footer-copyright">
+    <div class="container">
+      <p class="left">Made with <span class="red-text text-darken-4">♥️</span> in Portugal</p>
+      <p class="right">Powered by <a href="https://github.com/rafaelcpalmeida/contestr" target="_blank" class="orange-text text-darken-4">Contestr</a></p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
