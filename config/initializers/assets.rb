@@ -14,3 +14,9 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.precompile += %w( welcome.js )
 Rails.application.config.assets.precompile += %w( users.js )
+
+Rails.application.config.assets.precompile += %w( dashboard.js )
+
+Rails.application.config.assets.precompile += %w( users.css )
+Rails.application.config.assets.precompile += %w( welcome.scss )
+Rails.application.config.assets.precompile += %w( dashboard.scss )

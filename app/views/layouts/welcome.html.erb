@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contestr</title>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%= stylesheet_link_tag ('welcome.css') %>
+    <%= stylesheet_link_tag  "https://fonts.googleapis.com/icon?family=Material+Icons", "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" %>
+    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js" %>
+  </head>
+
+  <body>
+  <header>
+    <nav class="light-blue lighten-1" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Logo</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/signup">Registar</a></li>
+          <li><a href="/login">Entrar</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="/signup">Registar</a></li>
+          <li><a href="/login">Entrar</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+  </header>
+
+  <%= yield %>
+
+  <footer class="page-footer orange">
+    <div class="footer-copyright">
+      <div class="container">
+        <p class="left">Made with <span class="red-text text-darken-4">♥️</span> in Portugal</p>
+        <p class="right">Powered by <a href="https://github.com/rafaelcpalmeida/contestr" target="_blank" class="orange-text text-darken-4">Contestr</a></p>
+      </div>
+    </div>
+  </footer>
+  <%= javascript_include_tag('welcome.js') %>
+  </body>
+</html>
