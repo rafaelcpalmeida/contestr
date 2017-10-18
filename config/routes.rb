@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   get '/dashboard' => 'dashboard#index'
   get '/dashboard/new' => 'dashboard#new'
 
-  get '/dashboard/info' => 'dashboard#info'
+  get '/dashboard/show' => 'dashboard#show'
 
-  get '/dashboard/delete' => 'dashboard#delete'
+  delete '/dashboard/show' => 'dashboard#delete'
 
   post '/dashboard/create' => 'dashboard#create'
 

@@ -63,7 +63,7 @@
     </div>
     <div class="row">
       <div class="input-field col s12 center-align">
-        <button class="waves-effect waves-light btn" onclick="location.href='/dashboard/delete?id=<%= @project.id %>';" >Remover</button>
+        <%= button_to 'Remover', {:id => @project.id}, :method => :delete, :class => 'waves-effect waves-light btn'%>
       </div>
     </div>
   </div>

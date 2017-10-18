@@ -19,10 +19,11 @@
 
       <% @projects.each do |c| %>
       <% @submissions = Submission.where(project_id: c.id) %>
-          <tr onclick="window.document.location='/dashboard/info?id=' + <%= c.id %>;">
+          <tr>
             <td><%= c.title %> </td>
             <td><%= @submissions.size %> </td>
             <td><%= c.closeTime %> </td>
+            <td><a href="/dashboard/show?id=<%=c.id %>" class="waves-effect waves-light btn">Ver</a></td>
           </tr>
       <% end %>
       </tbody>
