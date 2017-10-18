@@ -12,6 +12,10 @@ class DashboardController < ApplicationController
 
   end
 
+  def info
+    @project = Project.find(params[:id])
+  end
+
 
   def create
 
