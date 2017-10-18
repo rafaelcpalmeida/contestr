@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   layout 'application'
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :userType)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation).merge(userType: User.exists?(userType: 1) ? 2 : 1)
   end
 
   def new
