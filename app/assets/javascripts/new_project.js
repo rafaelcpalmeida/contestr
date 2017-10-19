@@ -7,7 +7,6 @@ $('.datepicker').pickadate({
     closeOnSelect: false
 });
 
-
 $('.timepicker').pickatime({
     default: 'Atual',
     fromnow: 0,

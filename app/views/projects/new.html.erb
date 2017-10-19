@@ -8,41 +8,41 @@
   </div>
   <div class="container">
     <div class="row">
-      <%= form_for :project, url: '/dashboard/create' do |f| %>
+      <%= form_for :projects, url: '/projects/create' do |f| %>
       <div class="col s12">
         <div class="row">
           <div class="input-field col s12">
-            <input id="name" name="project[name]" type="text" class="validate">
+            <input id="name" name="projects[name]" type="text" class="validate">
             <label for="name">Nome</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="description" name="project[description]" class="materialize-textarea"></textarea>
+            <textarea id="description" name="projects[description]" class="materialize-textarea"></textarea>
             <label for="description">Descrição</label>
           </div>
         </div>
         <span>Data e hora de abertura</span>
         <div class="row">
           <div class="input-field col s6">
-            <input type="text" name="project[start_date]" class="datepicker">
+            <input type="text" name="projects[start_date]" class="datepicker">
           </div>
           <div class="input-field col s6">
-            <input type="text" name="project[start_hour]" class="timepicker">
+            <input type="text" name="projects[start_hour]" class="timepicker">
           </div>
         </div>
         <span>Data e hora de fecho</span>
         <div class="row">
           <div class="input-field col s6">
-            <input type="text" id="teste" name="project[finish_date]" class="datepicker">
+            <input type="text" id="teste" name="projects[finish_date]" class="datepicker">
           </div>
           <div class="input-field col s6">
-            <input type="text" name="project[finish_hour]" class="timepicker">
+            <input type="text" name="projects[finish_hour]" class="timepicker">
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <button class="waves-effect waves-light btn" type="submit" name="submit">Submeter</button>
+            <%= f.submit 'Submeter', class: 'waves-effect waves-light btn' %>
           </div>
         </div>
       </div>
