@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
   get '/dashboard' => 'dashboard#index'
-  get '/dashboard/new' => 'dashboard#new'
-  get '/dashboard/show' => 'dashboard#show'
-  delete '/dashboard/show' => 'dashboard#delete'
-  post '/dashboard/create' => 'dashboard#create'
+  get '/project/new' => 'project#new'
+  get '/project/show' => 'project#show'
+  delete '/project/show' => 'project#delete'
+  post '/project/create' => 'project#create'
 end
