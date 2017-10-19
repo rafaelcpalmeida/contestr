@@ -23,16 +23,10 @@
             <td><%= c.title %> </td>
             <td><%= @submissions.size %> </td>
             <td><%= c.closeTime %> </td>
-            <td><a href="/dashboard/show?id=<%=c.id %>" class="waves-effect waves-light btn">Ver</a></td>
+            <td><%= link_to 'Ver', {:action => 'show', :controller=> 'projects', :id => c.id}, class: 'waves-effect waves-light btn' %></td>
           </tr>
       <% end %>
       </tbody>
     </table>
   </div>
-
-
-
-
-
-  <br><br><br><br><br><br>
 </main>
