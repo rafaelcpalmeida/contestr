@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :authorize
-  layout 'dashboard'
 
+  layout 'dashboard'
   require 'date'
 
   def new
