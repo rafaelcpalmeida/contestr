@@ -1,6 +1,7 @@
 class ProjectController < ApplicationController
   before_action :authorize
   layout 'dashboard'
+
   require 'date'
 
   def new
@@ -8,7 +9,6 @@ class ProjectController < ApplicationController
   end
 
   def create
-
     start_time = DateTime.parse("#{params[:project][:start_date]} #{params[:project][:start_hour]}")
     formatted_start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
     close_time = DateTime.parse("#{params[:project][:finish_date]} #{params[:project][:finish_hour]}")
