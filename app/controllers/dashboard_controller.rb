@@ -12,6 +12,9 @@ class DashboardController < ApplicationController
 
   end
 
+  def show
+    @project = Project.find(params[:id])
+  end
 
   def create
 
@@ -25,5 +28,11 @@ class DashboardController < ApplicationController
     if project.save
       redirect_to '/dashboard'
     end
+  end
+
+  def delete
+    Project.find(params[:id]).destroy
+    Submission.where(project_id: params[:id]).destroy_all
+    redirect_to '/dashboard'
   end
 end
