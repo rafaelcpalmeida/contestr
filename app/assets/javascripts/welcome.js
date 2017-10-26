@@ -1,5 +1,5 @@
 (function($) {
     $(function() {
-        $('.button-collapse').sideNav();
+        $(".button-collapse").sideNav();
     });
 })(jQuery);
