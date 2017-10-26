@@ -1,0 +1,63 @@
+<% if !Submission.where(:project_id => @project.id, :user_id => current_user.id).empty? %>
+    <script>window.location.href = "/dashboard";</script>
+<% end %>
+<main>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text">Nova submissão</h1>
+      <br><br>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="row">
+        <div class="col s6">
+          <h5>Titulo: </h5>
+        </div>
+        <div class="col s6 center-align">
+          <h5><%= @project.title %></h5>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col s6">
+          <h5>Descricão: </h5>
+        </div>
+        <div class="col s6 center-align">
+          <h5><%= @project.description %></h5>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col s6">
+          <h5>Tempo restante: </h5>
+        </div>
+        <div class="col s6 center-align">
+          <h5 id="remaing_time"></h5>
+        </div>
+      </div>
+      <br><br><br>
+      <%= form_for :projects, :id => 'file', url: '/submission/upload' , html: { multipart: true } do |f| %>
+          <input style="display:none;" name="submission[project_id]" id="projects_attachment" type="text" value="<%=@project.id%>">
+          <div id="file" class="file-field input-field">
+            <div class="btn">
+              <span>File</span>
+              <input name="submission[attachment]" id="projects_attachment"  type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <%= f.submit 'Submeter', class: 'waves-effect waves-light btn' %>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</main>
+<script>var close_time = "<%= @project.closeTime %>" ;</script>
+<%= javascript_include_tag('countdown.js') %>

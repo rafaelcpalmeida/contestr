@@ -23,5 +23,7 @@ module Contestr
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
+
+    config.active_record.default_timezone = :local
   end
 end

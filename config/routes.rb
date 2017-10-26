@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   get '/projects/show' => 'projects#show'
   delete '/projects/show' => 'projects#delete'
   post '/projects/create' => 'projects#create'
+  get '/submissions/new' => 'submissions#new'
+  post '/submission/upload' => 'submissions#upload'
 end
