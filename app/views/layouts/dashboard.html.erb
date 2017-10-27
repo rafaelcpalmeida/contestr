@@ -35,11 +35,13 @@
         <span>Dashboard</span>
       </a>
     </li>
+    <% if current_user.userType == 1 %>
     <li>
       <a href="/projects/new" class="waves-effect waves-grey">
         <span>Create New</span>
       </a>
     </li>
+    <% end %>
     <li><a class="hide-on-large-only" href="/logout">Sair</a></li>
   </ul>
 </header>

@@ -30,4 +30,8 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
   end
+
+  # How to use Sonar DB
+  # Sonar.table_name = 'projects' -> table name
+  # @test = Sonar.all -> query to table
 end

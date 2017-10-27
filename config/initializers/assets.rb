@@ -16,6 +16,7 @@ Rails.application.config.assets.precompile += %w( welcome.js )
 Rails.application.config.assets.precompile += %w( users.js )
 Rails.application.config.assets.precompile += %w( dashboard.js )
 Rails.application.config.assets.precompile += %w( new_project.js )
+Rails.application.config.assets.precompile += %w( countdown.js )
 
 Rails.application.config.assets.precompile += %w( users.css )
 Rails.application.config.assets.precompile += %w( welcome.scss )

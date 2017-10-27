@@ -6,7 +6,7 @@ class CreateSubmissions < ActiveRecord::Migration[5.1]
       t.string :projectKey
       t.string :title
       t.string :overallResult
-
+      t.string :attachment
       t.timestamps
     end
   end

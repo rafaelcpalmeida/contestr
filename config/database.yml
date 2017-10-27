@@ -52,3 +52,14 @@ production:
   database: contestr_production
   username: <%= ENV['PRODUCTION_DATABASE_USERNAME'] %>
   password: <%= ENV['PRODUCTION_DATABASE_PASSWORD'] %>
+
+
+# Sonar Database
+sonar:
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['DEVELOPMENT_DATABASE_USERNAME'] %>
+  password: <%= ENV['DEVELOPMENT_DATABASE_PASSWORD'] %>
+  socket: /tmp/mysql.sock
+  database: sonar

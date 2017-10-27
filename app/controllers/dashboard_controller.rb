@@ -3,5 +3,6 @@ class DashboardController < ApplicationController
 
   def index
     @projects = Project.all
+    @submissions = Submission.where(:user_id => current_user.id)
   end
 end
