@@ -10,12 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017172057) do
+ActiveRecord::Schema.define(version: 20171207184040) do
+
+  create_table "documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "project_id"
+    t.string "filename"
+    t.string "content_type"
+    t.binary "file_contents", limit: 16777215
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_documents_on_project_id"
+  end
+
+  create_table "evaluations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "project_id"
+    t.bigint "user_id"
+    t.string "maintainability"
+    t.string "security"
+    t.string "reliability"
+    t.string "releasability"
+    t.string "language"
+    t.string "build_result"
+    t.string "run_result"
+    t.string "execution_time"
+    t.string "execution_memory"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_evaluations_on_project_id"
+    t.index ["user_id"], name: "index_evaluations_on_user_id"
+  end
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
     t.string "title"
     t.text "description"
+    t.text "languages"
     t.datetime "openTime"
     t.datetime "closeTime"
     t.datetime "created_at", null: false
@@ -29,9 +58,9 @@ ActiveRecord::Schema.define(version: 20171017172057) do
     t.string "projectKey"
     t.string "title"
     t.string "overallResult"
+    t.string "attachment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "attachment", default: ""
     t.index ["project_id"], name: "index_submissions_on_project_id"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end

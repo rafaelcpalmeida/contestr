@@ -15,13 +15,11 @@
     </div>
     <hr>
     <div class="row">
-      <div class="col s12 text-center">
+      <div class="col s6">
         <h5>Descricão: </h5>
       </div>
-    </div>
-    <div class="row">
-      <div class="col s12">
-        <h6><%= @project.description %></h6>
+      <div class="col s6 center-align">
+        <h5><%= @project.description %></h5>
       </div>
     </div>
     <hr>
@@ -75,21 +73,47 @@
           </div>
         </div>
     <%end %>
+    <% if !Submission.where(:project_id => @project.id, :user_id => current_user.id).empty? && current_user.userType == 2 && @has_been_analized%>
+        <div class="section no-pad-bot" id="index-banner">
+          <div class="container">
+            <h5 class="header center orange-text">Analise do código atual</h5>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col s3">
+            <h6>Maintainability: </h6>
+          </div>
+          <div class="col s3 center-align">
+            <h5><%= @maintainability%></h5>
+          </div>
+          <div class="col s3">
+            <h5>Security: </h5>
+          </div>
+          <div class="col s3 center-align">
+            <h5><%= @security %></h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s3">
+            <h5>Reliability: </h5>
+          </div>
+          <div class="col s3 center-align">
+            <h5><%= @reliability %></h5>
+          </div>
+          <div class="col s3">
+            <h5>Releasability: </h5>
+          </div>
+          <div class="col s3 center-align">
+            <h5><%= @releasability %></h5>
+          </div>
+        </div>
+        <br>
+    <% end %>
     <div class="row">
       <div class="input-field col s12 center-align">
         <% if current_user.userType == 1 %>
-            <table>
-            <tr>
-            <td style="text-align: right;"><%= link_to 'Modificar', {:action => 'edit', :controller=> 'projects', :id => @project.id}, class: 'waves-effect waves-light btn' %></td>
-            <td><%= button_to 'Remover', {:id => @project.id}, :method => :delete, :class => 'waves-effect waves-light btn'%></td>
-            </tr>
-            </table>
-        <% else %>
-            <% if Submission.where(:project_id => @project.id, :user_id => current_user.id).empty? %>
-                <td><%= link_to 'Submeter', {:action => 'new', :controller=> 'submissions', :project_id => @project.id}, class: 'waves-effect waves-light btn' %></td>
-            <% else %>
-                <td><%= link_to 'Submeter Novamente', {:action => 'new', :controller=> 'submissions', :project_id => @project.id}, class: 'waves-effect waves-light btn' %></td>
-            <% end %>
+            <%= button_to 'Remover', {:id => @project.id}, :method => :delete, :class => 'waves-effect waves-light btn'%>
         <% end %>
       </div>
     </div>

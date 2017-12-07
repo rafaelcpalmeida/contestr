@@ -1,0 +1,32 @@
+<main>
+  <div class="breadcrumb grey lighten-3">
+    <h6>
+      Dashboard
+    </h6>
+  </div>
+  <br><br>
+  <div class="container">
+    <h4>Concursos terminados</h4>
+    <table>
+      <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Numero de submissões</th>
+        <th>Tempo restante</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <% @projects.each do |c| %>
+          <% @submissions = Submission.where(project_id: c.id) %>
+          <tr>
+            <td><%= c.title %> </td>
+            <td><%= @submissions.size %> </td>
+            <td>Terminado</td>
+            <td><%= link_to 'Ver', {:action => 'details', :controller=> 'projects', :id => c.id}, class: 'waves-effect waves-light btn' %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</main>

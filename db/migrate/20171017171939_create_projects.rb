@@ -4,6 +4,7 @@ class CreateProjects < ActiveRecord::Migration[5.1]
       t.belongs_to :user, index: true
       t.string :title
       t.text :description
+      t.text :languages
       t.datetime :openTime
       t.datetime :closeTime
 

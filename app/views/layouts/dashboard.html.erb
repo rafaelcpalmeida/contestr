@@ -31,17 +31,28 @@
       </div>
     </li>
     <li>
-      <a href="/dashboard" class="grey white-text darken-3 waves-effect waves-grey">
-        <span>Dashboard</span>
-      </a>
+      <% if @page.nil? or @page == "index" %>
+          <a href="/dashboard" class="grey white-text darken-3 waves-effect waves-grey"><span>Dashboard</span></a>
+      <% else %>
+          <a href="/dashboard" class="darken-3 waves-effect waves-grey"><span>Dashboard</span></a>
+      <% end %>
     </li>
     <% if current_user.userType == 1 %>
     <li>
-      <a href="/projects/new" class="waves-effect waves-grey">
-        <span>Create New</span>
-      </a>
+      <% if !@page.nil? and @page == "new" %>
+          <a href="/projects/new" class="grey white-text darken-3 waves-effect waves-grey"><span>Create New</span></a>
+      <% else %>
+          <a href="/projects/new" class="waves-effect waves-grey"><span>Create New</span></a>
+      <%end%>
     </li>
     <% end %>
+    <li>
+      <% if !@page.nil? and @page == "closed" %>
+          <a href="/dashboard/closed" class="grey white-text darken-3 waves-effect waves-grey"><span>Closed</span></a>
+      <% else %>
+          <a href="/dashboard/closed" class="waves-effect waves-grey"><span>Closed</span></a>
+      <% end %>
+    </li>
     <li><a class="hide-on-large-only" href="/logout">Sair</a></li>
   </ul>
 </header>

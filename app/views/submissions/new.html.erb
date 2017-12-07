@@ -1,6 +1,3 @@
-<% if !Submission.where(:project_id => @project.id, :user_id => current_user.id).empty? %>
-    <script>window.location.href = "/dashboard";</script>
-<% end %>
 <main>
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
@@ -21,11 +18,13 @@
       </div>
       <hr>
       <div class="row">
-        <div class="col s6">
+        <div class="col s12 text-center">
           <h5>Descricão: </h5>
         </div>
-        <div class="col s6 center-align">
-          <h5><%= @project.description %></h5>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h6><%= @project.description %></h6>
         </div>
       </div>
       <hr>
@@ -37,26 +36,47 @@
           <h5 id="remaing_time"></h5>
         </div>
       </div>
+      <script src="https://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
       <br><br><br>
       <%= form_for :projects, :id => 'file', url: '/submission/upload' , html: { multipart: true } do |f| %>
           <input style="display:none;" name="submission[project_id]" id="projects_attachment" type="text" value="<%=@project.id%>">
-          <div id="file" class="file-field input-field">
-            <div class="btn">
-              <span>File</span>
-              <input name="submission[attachment]" id="projects_attachment"  type="file">
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
+          <div class="row">
+            <select name="submission[language]">
+              <option value="" disabled selected>Escolha a linguagem: </option>
+              <% if @languages.include? 'C'%>
+                <option value="c">C</option>
+              <% end %>
+              <% if @languages.include? 'Java'%>
+                <option value="java">Java</option>
+              <% end %>
+              <% if @languages.include? 'PHP'%>
+                <option value="php">PHP</option>
+              <% end %>
+              <% if @languages.include? 'Python'%>
+                <option value="py">Python</option>
+              <% end %>
+            </select>
+            <label>Linguagem</label>
+          </div>
+          <div class="row">
+            <div id="myWrapper">
+              <div id="myEditor"></div>
             </div>
           </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <%= f.submit 'Submeter', class: 'waves-effect waves-light btn' %>
-              </div>
+          <input style="display:none;" name="submission[code]" id="submission_code" type="text">
+          <div class="row">
+            <div class="input-field col s12">
+              <% if !Submission.where(:project_id => @project.id, :user_id => current_user.id).empty? %>
+                  <%= f.submit 'Submeter Novamente', :onclick => 'getCode()' , class: 'waves-effect waves-light btn' %>
+              <% else %>
+                  <%= f.submit 'Submeter', :onclick => 'getCode()', class: 'waves-effect waves-light btn' %>
+              <% end %>
             </div>
+          </div>
           </div>
       <% end %>
-    </div>
+      </div>
   </div>
 </main>
 <script>var close_time = "<%= @project.closeTime %>" ;</script>

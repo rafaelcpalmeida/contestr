@@ -1,0 +1,25 @@
+submission = Submission.find_by(:user_id => current_user.id, :project_id => params[:id])
+
+    Sonar.table_name = 'projects'
+    @has_been_analized = false
+
+    if Sonar.exists?(:kee => "#{params[:id]}:#{current_user.id}:#{submission.attachment}")
+      project_uuid = Sonar.find_by(:kee => "#{params[:id]}:#{current_user.id}:#{submission.attachment}").project_uuid
+      uuid = Sonar.find_by(:kee => "#{params[:id]}:#{current_user.id}:#{submission.attachment}").uuid
+      @has_been_analized = true
+
+    elsif Sonar.exists?(:kee => "#{params[:id]}:#{current_user.id}")
+      project_uuid = Sonar.find_by(:kee => "#{params[:id]}:#{current_user.id}").project_uuid
+      uuid = Sonar.find_by(:kee => "#{params[:id]}:#{current_user.id}").uuid
+      @has_been_analized = true
+    end
+
+    Sonar.table_name = 'project_measures'
+
+    if Sonar.exists?(:component_uuid => project_uuid) and @has_been_analized
+      analysis_uuid = Sonar.find_by(:component_uuid => uuid).analysis_uuid
+      @maintainability = Sonar.find_by(:component_uuid => uuid, :metric_id => 121).text_value
+      @security = Sonar.find_by(:component_uuid => uuid, :metric_id => 133).text_value
+      @reliability = Sonar.find_by(:component_uuid => uuid, :metric_id => 129).text_value
+      @releasability = Sonar.find_by(:component_uuid => project_uuid, :metric_id => 138, :analysis_uuid => analysis_uuid).text_value
+      @has_been_analized = true

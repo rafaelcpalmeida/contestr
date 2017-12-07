@@ -3,22 +3,15 @@ class ProjectsController < ApplicationController
 
   layout 'dashboard'
   require 'date'
-
   def new
-
+    @page = 'new'
   end
 
   def create
-    start_time = DateTime.parse("#{params[:projects][:start_date]} #{params[:projects][:start_hour]}")
-    formatted_start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
-    close_time = DateTime.parse("#{params[:projects][:finish_date]} #{params[:projects][:finish_hour]}")
-    formatted_close_time = close_time.strftime("%Y-%m-%d %H:%M:%S")
-
-    project = Project.new({:user_id => current_user.id, :title => params[:projects][:name], :description => params[:projects][:description], :openTime => formatted_start_time, :closeTime => formatted_close_time})
-
-    if project.save
+    if Project.create(params, current_user)
       redirect_to '/dashboard'
     end
+
   end
 
   def delete
@@ -29,9 +22,36 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @document = Document.find_by(:project_id => @project.id)
+    languages_array = ActiveSupport::JSON.decode(@project.languages)
+
+    if languages_array.size() == 1
+      @languages = languages_array.join('')
+    else
+      @languages = languages_array.join(', ')
+    end
+
   end
 
-  # How to use Sonar DB
-  # Sonar.table_name = 'projects' -> table name
-  # @test = Sonar.all -> query to table
+  def send_document
+    doc = Document.find_by(:project_id => params[:id])
+    send_data(doc.file_contents, type: doc.content_type, filename: doc.filename)
+  end
+
+  def edit
+    @project = Project.find(params[:id])
+    @document = Document.find_by(:project_id => @project.id)
+    @close_date = @project.closeTime.strftime('%Y-%m-%d')
+    @languages = ActiveSupport::JSON.decode(@project.languages)
+  end
+
+  def update
+    if Project.project_update(params)
+      redirect_to '/dashboard'
+    end
+  end
+
+  def details
+    show()
+  end
 end
