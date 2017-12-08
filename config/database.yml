@@ -16,6 +16,7 @@ default: &default
   username: <%= ENV['DEVELOPMENT_DATABASE_USERNAME'] %>
   password: <%= ENV['DEVELOPMENT_DATABASE_PASSWORD'] %>
   socket: /tmp/mysql.sock
+  reconnect: true
 
 development:
   <<: *default

@@ -25,3 +25,29 @@ var x = setInterval(function() {
         document.getElementById("remaing_time").innerHTML = "Expirado";
     }
 }, 1000);
+
+$(document).ready(function() {
+    $('select').material_select();
+});
+
+YUI().use(
+    'aui-ace-editor',
+    function(Y) {
+        var editor = new Y.AceEditor(
+            {
+                boundingBox: '#myEditor',
+                value: 'Cole aqui o código.',
+                width: 'absolute'
+            }
+        ).render();
+    }
+);
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
+function getCode(){
+    document.getElementById("submission_code").value = ace.edit("myEditor").getValue().replaceAll("\n","<br>");
+}

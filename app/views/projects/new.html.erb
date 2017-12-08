@@ -22,6 +22,17 @@
             <label for="description">Descrição</label>
           </div>
         </div>
+        <div class="row">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>PDF</span>
+              <%= f.file_field :file %>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+        </div>
         <span>Data e hora de abertura</span>
         <div class="row">
           <div class="input-field col s6">
@@ -38,6 +49,26 @@
           </div>
           <div class="input-field col s6">
             <input type="text" name="projects[finish_hour]" class="timepicker">
+          </div>
+        </div>
+        <span>Linguagens</span><br><br>
+          <div class="row">
+            <div class="col s3">
+              <input type="checkbox" id="C" name="projects[C]"/>
+              <label for="C">C</label>
+            </div>
+            <div class="col s3">
+              <input type="checkbox" id="Java" name="projects[Java]"/>
+              <label for="Java">Java</label>
+            </div>
+            <div class="col s3">
+              <input type="checkbox" id="php" name="projects[PHP]"/>
+              <label for="php">PHP</label>
+            </div>
+            <div class="col s3">
+              <input type="checkbox" id="python" name="projects[Python]"/>
+              <label for="python">Python</label>
+            </div>
           </div>
         </div>
         <div class="row">

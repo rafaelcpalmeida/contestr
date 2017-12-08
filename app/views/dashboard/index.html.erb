@@ -11,7 +11,13 @@
       <thead>
       <tr>
         <th>Name</th>
-        <th>Number of Submitions</th>
+        <th>
+          <%if current_user.userType == 1 %>
+              Number of Submitions
+          <%else%>
+              Estado
+          <%end%>
+        </th>
         <th>Remaing Time</th>
       </tr>
       </thead>
@@ -21,17 +27,21 @@
       <% @submissions = Submission.where(project_id: c.id) %>
           <tr>
             <td><%= c.title %> </td>
-            <td><%= @submissions.size %> </td>
-            <td><%= distance_of_time_in_words(Time.now,  c.closeTime) %> </td>
+            <td>
             <% if current_user.userType == 1 %>
-                <td><%= link_to 'Ver', {:action => 'show', :controller=> 'projects', :id => c.id}, class: 'waves-effect waves-light btn' %></td>
-            <% else %>
-                <% if Submission.where(:project_id => c.id, :user_id => current_user.id).empty? %>
-                  <td><%= link_to 'Submeter', {:action => 'new', :controller=> 'submissions', :project_id => c.id}, class: 'waves-effect waves-light btn' %></td>
-                <% else %>
-                    <td>Submetido!</td>
-              <% end %>
-            <% end %>
+            <%= @submissions.size %>
+            <%else
+                if Submission.where(:project_id => c.id, :user_id => current_user).empty?
+                  %>
+                      Não submetido.
+                  <%else%>
+                      Submetido
+                  <%end%>
+              <%end%>
+
+            </td>
+            <td><%= distance_of_time_in_words(Time.now,  c.closeTime) %> </td>
+            <td><%= link_to 'Ver', {:action => 'show', :controller=> 'projects', :id => c.id}, class: 'waves-effect waves-light btn' %></td>
           </tr>
       <% end %>
       </tbody>
