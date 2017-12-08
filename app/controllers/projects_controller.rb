@@ -71,4 +71,8 @@ class ProjectsController < ApplicationController
   def details
     show()
   end
+
+  # How to use Sonar DB
+  # Sonar.table_name = 'projects' -> table name
+  # @test = Sonar.all -> query to table
 end
