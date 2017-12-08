@@ -19,6 +19,18 @@ class ProjectsController < ApplicationController
     @title = Project.find(params[:id]).title
   end
 
+  def code
+    full_path = Submission.find(params[:id]).attachment
+    filename_array = full_path.split "/"
+    filename = filename_array[filename_array.size - 1]
+
+    send_file(
+        "#{Rails.root}/#{full_path}",
+        filename: "#{filename}",
+        type: "text/html"
+    )
+  end
+
   def delete
     Project.find(params[:id]).destroy
     Submission.where(project_id: params[:id]).destroy_all

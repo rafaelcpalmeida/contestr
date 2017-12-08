@@ -23,7 +23,9 @@ class SubmissionsController < ApplicationController
       Submission.destroy(Submission.find_by(:user_id => current_user.id, :project_id => project_id).id)
     end
 
-    @submissions = Submission.new({:user_id => current_user.id, :project_id => project_id, :projectKey => key, :title => title, :attachment => filename})
+    full_path = "public/uploads/#{project_id}/#{current_user.id}/#{filename}"
+
+    @submissions = Submission.new({:user_id => current_user.id, :project_id => project_id, :projectKey => key, :title => title, :attachment => full_path})
 
     if @submissions.save
       path = "public/uploads/#{project_id}/#{current_user.id}"

@@ -23,7 +23,7 @@
             <td><%= User.find(c.user_id).name %> </td>
             <td><%= User.find(c.user_id).email %> </td>
             <td>Under construction</td>
-            <td><%= link_to 'Descarregar código', {:action => 'submissions', :controller=> 'projects', :id => c.id}, class: 'waves-effect waves-light btn' %></td>
+            <td><%= link_to 'Descarregar código', {:action => 'code', :controller=> 'projects', :id => c.id}, class: 'waves-effect waves-light btn' %></td>
           </tr>
       <% end %>
       </tbody>
