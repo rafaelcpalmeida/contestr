@@ -61,7 +61,7 @@
             <% @submissions = Submission.where(project_id: @project.id) %>
             <h5><%= @submissions.size %></h5>
             <% if @submissions.size > 0 %>
-                <%= button_to 'Ver submissões', {:id => @project.id}, :method => :delete, :class => 'waves-effect waves-light btn'%>
+                <%= link_to 'Ver submissões', {:action => 'submissions', :controller=> 'projects', :id => @project.id}, class: 'waves-effect waves-light btn' %>
             <%end%>
           </div>
         </div>

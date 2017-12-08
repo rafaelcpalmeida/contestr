@@ -1,0 +1,32 @@
+<main>
+  <div class="breadcrumb grey lighten-3">
+    <h6>
+      <%= @title %>
+    </h6>
+  </div>
+  <br><br>
+  <div class="container">
+    <h4>Current submissions</h4>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Result</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @submissions.each do |c| %>
+          <tr>
+            <td><%= c.user_id %> </td>
+            <td><%= User.find(c.user_id).name %> </td>
+            <td><%= User.find(c.user_id).email %> </td>
+            <td>Under construction</td>
+            <td><%= link_to 'Descarregar código', {:action => 'submissions', :controller=> 'projects', :id => c.id}, class: 'waves-effect waves-light btn' %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</main>

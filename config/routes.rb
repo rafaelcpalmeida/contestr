@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/dashboard' => 'dashboard#index'
   get '/dashboard/closed' => 'dashboard#closed'
   get '/projects/new' => 'projects#new'
+  get '/project/submissions' => 'projects#submissions'
   get '/projects/show' => 'projects#show'
   get '/projects/details' => 'projects#details'
   delete '/projects/show' => 'projects#delete'

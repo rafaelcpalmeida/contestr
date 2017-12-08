@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
 
   layout 'dashboard'
   require 'date'
+
   def new
     @page = 'new'
   end
@@ -11,7 +12,11 @@ class ProjectsController < ApplicationController
     if Project.create(params, current_user)
       redirect_to '/dashboard'
     end
+  end
 
+  def submissions
+    @submissions = Submission.where(:project_id => params[:id])
+    @title = Project.find(params[:id]).title
   end
 
   def delete
