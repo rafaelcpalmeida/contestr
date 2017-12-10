@@ -3,15 +3,13 @@ class DashboardController < ApplicationController
 
   def index
     @page = 'index'
-    current_time = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-    @projects = Project.where("closeTime > '#{current_time}'")
-    @submissions = Submission.where(:user_id => current_user.id)
+    @projects = Project.where("closeTime > :current_time", {current_time: Time.now.strftime("%Y-%m-%d %H:%M:%S")})
+    @submissions = Submission.where(user_id: current_user.id)
   end
 
   def closed
     @page = 'closed'
-    current_time = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-    @projects = Project.where("closeTime < '#{current_time}'")
-    @submissions = Submission.where(:user_id => current_user.id)
+    @projects = Project.where("closeTime < :current_time", {current_time: Time.now.strftime("%Y-%m-%d %H:%M:%S")})
+    @submissions = Submission.where(user_id: current_user.id)
   end
 end

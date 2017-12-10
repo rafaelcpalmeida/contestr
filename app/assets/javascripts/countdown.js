@@ -1,5 +1,5 @@
-var close_time = $('#close_time').html();
-var countDownDate = new Date(close_time).getTime();
+var closeTime = $("#close_time").html();
+var countDownDate = new Date(closeTime).getTime();
 
 var x = setInterval(function() {
     var now = new Date().getTime();
@@ -23,7 +23,7 @@ var x = setInterval(function() {
 
     if (distance < 0) {
         clearInterval(x);
-        $('#remaining_time').html("Expirado");
+        $("#remaining_time").html("Expirado");
     }else{
         $("#remaining_time").html(string);
     }
