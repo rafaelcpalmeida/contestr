@@ -43,18 +43,11 @@ YUI().use("aui-ace-editor", function(Y) {
         ).render();
     }
 );
-/*
-String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
-};
-*/
 
 function replaceAll(str, needle, replacement) {
     return str.split(needle).join(replacement);
 }
 
 function getCode(){
-    //document.getElementById("submission_code").value = ace.edit("myEditor").getValue().replaceAll("\n","<br>");
     document.getElementById("submission_code").value = replaceAll(ace.edit("myEditor").getValue(), "\n", "<br>");
 }
