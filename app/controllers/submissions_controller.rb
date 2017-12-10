@@ -21,14 +21,15 @@ class SubmissionsController < ApplicationController
 
     partial_path = File.dirname(file_path)
 
-    if Submission.exists?(:user_id => current_user.id, :project_id => project_id)
+    if Submission.exists?(user_id: current_user.id, project_id: project_id)
       FileUtils.rm_rf(partial_path)
-      Submission.destroy(Submission.find_by(:user_id => current_user.id, :project_id => project_id).id)
+      Submission.destroy(Submission.find_by(user_id: current_user.id,
+                                            project_id: project_id).id)
     end
 
-
-
-    @submissions = Submission.new({:user_id => current_user.id, :project_id => project_id, :projectKey => key, :title => title, :attachment => file_path})
+    @submissions = Submission.new(user_id: current_user.id,
+                                  project_id: project_id, projectKey: key,
+                                  title: title, attachment: file_path)
 
     if @submissions.save
       FileUtils.mkpath partial_path unless File.exist?(partial_path)
