@@ -1,5 +1,5 @@
 var countDownDate = new Date(close_time).getTime();
-function escapeHTML(str) { return str.replace(/[&"'<>]/g, (m) => ({ "&": "&amp;", '"': "&quot;", "'": "&#39;", "<": "&lt;", ">": "&gt;" })[m]); }
+
 var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
@@ -20,21 +20,22 @@ var x = setInterval(function() {
         string = seconds + "s ";
     }
 
-    document.getElementById("remaining_time").innerHTML = escapeHTML(string);
     if (distance < 0) {
         clearInterval(x);
-        document.getElementById("remaining_time").innerHTML = escapeHTML("Expirado");
+        $('#remaining_time').html("Expirado");
+    }else{
+        $("#remaining_time").html(string);
     }
 }, 1000);
 
 $(document).ready(function() {
-    $('select').material_select();
+    $("select").material_select();
 });
 
-YUI().use('aui-ace-editor', function(Y) {
+YUI().use("aui-ace-editor", function(Y) {
         var editor = new Y.AceEditor(
             {
-                boundingBox: '#myEditor',
+                boundingBox: "#myEditor",
                 value: "Cole aqui o código.",
                 width: "absolute"
             }
@@ -48,8 +49,8 @@ String.prototype.replaceAll = function(search, replacement) {
 };
 */
 
-function replaceAll(str, find, replace) {
-    return str.replace(new RegExp(find, 'g'), replace);
+function replaceAll(str, needle, replacement) {
+    return str.split(needle).join(replacement);
 }
 
 function getCode(){

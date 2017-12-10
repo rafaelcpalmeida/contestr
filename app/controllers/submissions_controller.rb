@@ -31,7 +31,7 @@ class SubmissionsController < ApplicationController
       path = "public/uploads/#{project_id}/#{current_user.id}"
       FileUtils.mkpath path unless File.exist?(path)
 
-      File.open(full_path, 'w') { |file| file.write(code) }
+      File.open("#{path}/#{filename}", 'w') { |file| file.write(code) }
       redirect_to '/dashboard'
     else
       redirect_to "/submissions/new?project_id=#{project_id}"
