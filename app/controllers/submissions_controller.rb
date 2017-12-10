@@ -17,21 +17,23 @@ class SubmissionsController < ApplicationController
     key = "#{current_user.name}_#{project.title}"
 
     filename = "main.#{language}"
+    file_path = "public/uploads/#{project_id}/#{current_user.id}/#{filename}"
+
+    partial_path = File.dirname(file_path)
 
     if Submission.exists?(:user_id => current_user.id, :project_id => project_id)
-      FileUtils.rm_rf("public/uploads/#{project_id}/#{current_user.id}")
+      FileUtils.rm_rf(partial_path)
       Submission.destroy(Submission.find_by(:user_id => current_user.id, :project_id => project_id).id)
     end
 
-    full_path = "public/uploads/#{project_id}/#{current_user.id}/#{filename}"
 
-    @submissions = Submission.new({:user_id => current_user.id, :project_id => project_id, :projectKey => key, :title => title, :attachment => full_path})
+
+    @submissions = Submission.new({:user_id => current_user.id, :project_id => project_id, :projectKey => key, :title => title, :attachment => file_path})
 
     if @submissions.save
-      path = "public/uploads/#{project_id}/#{current_user.id}"
-      FileUtils.mkpath path unless File.exist?(path)
+      FileUtils.mkpath partial_path unless File.exist?(partial_path)
 
-      File.open("#{path}/#{filename}", 'w') { |file| file.write(code) }
+      File.open(File.path(file_path), 'w') { |file| file.write(code) }
       redirect_to '/dashboard'
     else
       redirect_to "/submissions/new?project_id=#{project_id}"
