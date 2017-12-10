@@ -30,6 +30,15 @@
       <hr>
       <div class="row">
         <div class="col s6">
+          <h5>Data de fecho</h5>
+        </div>
+        <div class="col s6 center-align">
+          <h5 id="close_time"><%= @project.closeTime %></h5>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col s6">
           <h5>Tempo restante: </h5>
         </div>
         <div class="col s6 center-align">
@@ -79,5 +88,4 @@
       </div>
   </div>
 </main>
-<script>var close_time = "<%= @project.closeTime %>" ;</script>
 <%= javascript_include_tag('countdown.js') %>

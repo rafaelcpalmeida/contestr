@@ -1,3 +1,4 @@
+var close_time = $('#close_time').html();
 var countDownDate = new Date(close_time).getTime();
 
 var x = setInterval(function() {
