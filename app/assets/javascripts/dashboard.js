@@ -1,1 +1,1 @@
-(function () { $(".button-collapse").sideNav();})();
+(function () { $(".button-collapse").sideNav();}());

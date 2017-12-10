@@ -46,6 +46,11 @@ bower.json
 # Ignore local env files
 config/local_env.yml
 
-#Ignore RubyMine folder
+# Ignore RubyMine folder
 .idea
 
+# Files upload directory
+public/uploads/
+
+# Temporary old code
+old.txt

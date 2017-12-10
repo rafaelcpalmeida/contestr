@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
   before_action :authorize
-
+  require 'FileUtils'
   layout 'dashboard'
 
   def new
@@ -19,7 +19,7 @@ class SubmissionsController < ApplicationController
     filename = "main.#{language}"
 
     if Submission.exists?(:user_id => current_user.id, :project_id => project_id)
-      system("cd public/uploads/#{project_id}/ && rm -d -r *")
+      FileUtils.rm_rf("public/uploads/#{project_id}/#{current_user.id}")
       Submission.destroy(Submission.find_by(:user_id => current_user.id, :project_id => project_id).id)
     end
 
@@ -29,8 +29,9 @@ class SubmissionsController < ApplicationController
 
     if @submissions.save
       path = "public/uploads/#{project_id}/#{current_user.id}"
-      system("mkdir -p #{path}")
-      File.open("#{path}/#{filename}", 'w') { |file| file.write(code)}
+      FileUtils.mkpath path unless File.exist?(path)
+
+      File.open(full_path, 'w') { |file| file.write(code) }
       redirect_to '/dashboard'
     else
       redirect_to "/submissions/new?project_id=#{project_id}"
