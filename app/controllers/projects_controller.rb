@@ -42,12 +42,7 @@ class ProjectsController < ApplicationController
     @document = Document.find_by(:project_id => @project.id)
     languages_array = ActiveSupport::JSON.decode(@project.languages)
 
-    if languages_array.size() == 1
-      @languages = languages_array.join('')
-    else
-      @languages = languages_array.join(', ')
-    end
-
+    @languages = languages_array.join(', ')
   end
 
   def send_document
