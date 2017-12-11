@@ -5,8 +5,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     "uploads/#{model.project_id}/#{model.user_id}"
   end
 
-  #def extension_whitelist
-  #  %w(c)
-  #end
-
+  def extension_whitelist
+    %w[c py java php]
+  end
 end

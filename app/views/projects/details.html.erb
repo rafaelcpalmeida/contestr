@@ -15,11 +15,13 @@
     </div>
     <hr>
     <div class="row">
-      <div class="col s6">
+      <div class="col s12 text-center">
         <h5>Descricão: </h5>
       </div>
-      <div class="col s6 center-align">
-        <h5><%= @project.description %></h5>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <h6><%= @project.description %></h6>
       </div>
     </div>
     <hr>
@@ -51,19 +53,19 @@
     </div>
     <hr>
     <% if current_user.userType == 1 %>
-        <div class="row">
-          <div class="col s6">
-            <h5>Total de submissões: </h5>
-          </div>
-          <div class="col s6 center-align">
-            <% @submissions = Submission.where(project_id: @project.id) %>
-            <h5><%= @submissions.size %></h5>
-            <% if @submissions.size > 0 %>
-                <%= button_to 'Ver submissões', {:id => @project.id}, :method => :delete, :class => 'waves-effect waves-light btn'%>
-            <%end%>
-          </div>
+      <div class="row">
+        <div class="col s6">
+          <h5>Total de submissões: </h5>
         </div>
-        <hr>
+        <div class="col s6 center-align">
+          <% @submissions = Submission.where(project_id: @project.id) %>
+          <h5><%= @submissions.size %></h5>
+          <% if @submissions.size > 0 %>
+            <%= link_to 'Ver submissões', {:action => 'submissions', :controller=> 'projects', :id => @project.id}, class: 'waves-effect waves-light btn' %>
+          <%end%>
+        </div>
+      </div>
+      <hr>
     <% end %>
     <br>
     <% if @document != nil %>

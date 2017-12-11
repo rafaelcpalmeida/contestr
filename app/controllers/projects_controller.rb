@@ -63,7 +63,7 @@ class ProjectsController < ApplicationController
   end
 
   def details
-    show()
+    show
   end
 
   # How to use Sonar DB
