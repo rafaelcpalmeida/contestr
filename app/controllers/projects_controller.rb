@@ -15,19 +15,18 @@ class ProjectsController < ApplicationController
   end
 
   def submissions
-    @submissions = Submission.where(:project_id => params[:id])
+    @submissions = Submission.where(project_id: params[:id])
     @title = Project.find(params[:id]).title
   end
 
   def code
     full_path = Submission.find(params[:id]).attachment
-    filename_array = full_path.split "/"
+    filename_array = full_path.split '/'
     filename = filename_array[filename_array.size - 1]
 
-    send_file(
-        "#{Rails.root}/#{full_path}",
-        filename: "#{filename}",
-        type: "text/html"
+    send_file("#{Rails.root}/#{full_path}",
+              filename: "#{filename}",
+              type: "text/plain"
     )
   end
 
@@ -39,25 +38,20 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @document = Document.find_by(:project_id => @project.id)
+    @document = Document.find_by(project_id: @project.id)
     languages_array = ActiveSupport::JSON.decode(@project.languages)
 
-    if languages_array.size() == 1
-      @languages = languages_array.join('')
-    else
-      @languages = languages_array.join(', ')
-    end
-
+    @languages = languages_array.join(', ')
   end
 
   def send_document
-    doc = Document.find_by(:project_id => params[:id])
+    doc = Document.find_by(project_id: params[:id])
     send_data(doc.file_contents, type: doc.content_type, filename: doc.filename)
   end
 
   def edit
     @project = Project.find(params[:id])
-    @document = Document.find_by(:project_id => @project.id)
+    @document = Document.find_by(project_id: @project.id)
     @close_date = @project.closeTime.strftime('%Y-%m-%d')
     @languages = ActiveSupport::JSON.decode(@project.languages)
   end
@@ -69,7 +63,7 @@ class ProjectsController < ApplicationController
   end
 
   def details
-    show()
+    show
   end
 
   # How to use Sonar DB

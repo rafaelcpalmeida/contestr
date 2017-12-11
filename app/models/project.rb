@@ -52,19 +52,19 @@ class Project < ApplicationRecord
   def self.get_languages(params)
     languages = []
 
-    if !params[:projects][:C].nil?
+    unless params[:projects][:C].nil?
       languages.push('C')
     end
 
-    if !params[:projects][:Java].nil?
+    unless params[:projects][:Java].nil?
       languages.push('Java')
     end
 
-    if !params[:projects][:Python].nil?
+    unless params[:projects][:Python].nil?
       languages.push('Python')
     end
 
-    if !params[:projects][:PHP].nil?
+    unless params[:projects][:PHP].nil?
       languages.push('PHP')
     end
 
