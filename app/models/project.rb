@@ -14,18 +14,13 @@ class Project < ApplicationRecord
     fields[:description] = params[:projects][:description]
 
     if params[:projects][:file]
-      if Document.update_doc(Document.find_by(:project_id => params[:projects][:id]).id,
-                         params[:projects][:file]) && Project.update(params[:projects][:id], fields)
-        return true
-      end
-      return false
+      document_id = Document.find_by(project_id: params[:projects][:id]).id
+      Document.update_doc(document_id, params[:projects][:file])
+
+      Project.update(params[:projects][:id], fields)
     end
 
-    if Project.update(params[:projects][:id], fields)
-      return true
-    end
-
-    return false
+    Project.update(params[:projects][:id], fields)
   end
 
   def self.create(params, current_user)
@@ -33,20 +28,15 @@ class Project < ApplicationRecord
     formatted_start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
     close_time = DateTime.parse("#{params[:projects][:finish_date]} #{params[:projects][:finish_hour]}")
     formatted_close_time = close_time.strftime("%Y-%m-%d %H:%M:%S")
-
-    languages = self.get_languages(params)
-
-    project = Project.new({:user_id => current_user.id, :title => params[:projects][:name],
-                           :description => params[:projects][:description], :openTime => formatted_start_time,
-                           :closeTime => formatted_close_time, :languages => languages.to_json})
-
-
-    if project.save
-      if Document.create(project.id, params[:projects][:file])
-        return true
-      end
-    end
-    return false
+    project = Project.new(user_id: current_user.id,
+                           title: params[:projects][:name],
+                           description: params[:projects][:description],
+                           openTime: formatted_start_time,
+                           closeTime: formatted_close_time,
+                           languages: get_languages(params).to_json)
+    project.save
+    Document.create(project.id, params[:projects][:file])
+    return project
   end
 
   def self.get_languages(params)

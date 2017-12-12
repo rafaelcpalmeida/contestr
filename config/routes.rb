@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get '/projects/show/pdf' => 'projects#send_document'
   get '/projects/edit' => 'projects#edit'
   post '/projects/update' => 'projects#update'
+  get '/projects/certificate' => 'projects#certificate', :format => 'pdf'
 end

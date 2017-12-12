@@ -9,10 +9,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
-    if User.where(email: user.email).empty?
-      if user.save
-        session[:user_id] = user.id
+    @user = User.new(user_params)
+    if User.where(email: @user.email).empty?
+      if @user.save
+        ApplicationMailer.register_email(@user).deliver
+        session[:user_id] = @user.id
         redirect_to '/login'
       else
         redirect_to '/signup'
