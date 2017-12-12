@@ -9,9 +9,9 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    if Project.create(params, current_user)
-      redirect_to '/dashboard'
-    end
+    project = Project.create(params, current_user)
+    ApplicationMailer.new_project(project).deliver
+    redirect_to '/dashboard'
   end
 
   def submissions
@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
 
     send_file("#{Rails.root}/#{full_path}",
               filename: "#{filename}",
-              type: "text/plain"
+              type: 'text/plain'
     )
   end
 
@@ -64,6 +64,26 @@ class ProjectsController < ApplicationController
 
   def details
     show
+  end
+
+  def certificate
+    @title = Project.find(params[:id]).title
+    @username = current_user.name
+    @date = Time.now.strftime('%d/%m/%Y')
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'certificate',
+               layout: 'certificate',
+               orientation: 'Landscape',
+               page_size: 'A4',
+               margin: { top: 7,
+                         bottom: 4,
+                         left: 15,
+                         right: 15
+               }
+      end
+    end
   end
 
   # How to use Sonar DB
