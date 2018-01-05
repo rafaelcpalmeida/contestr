@@ -32,22 +32,3 @@ var x = setInterval(function() {
 $(document).ready(function() {
     $("select").material_select();
 });
-
-YUI().use("aui-ace-editor", function(Y) {
-        var editor = new Y.AceEditor(
-            {
-                boundingBox: "#myEditor",
-                value: "Cole aqui o código.",
-                width: "absolute"
-            }
-        ).render();
-    }
-);
-
-function replaceAll(str, needle, replacement) {
-    return str.split(needle).join(replacement);
-}
-
-function getCode(){
-    document.getElementById("submission_code").value = replaceAll(ace.edit("myEditor").getValue(), "\n", "<br>");
-}

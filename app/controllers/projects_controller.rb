@@ -10,7 +10,25 @@ class ProjectsController < ApplicationController
 
   def create
     project = Project.create(params, current_user)
-    ApplicationMailer.new_project(project).deliver
+    doc = Document.find_by(project_id: project.id)
+    users = User.where(userType: 2).to_a
+    if doc.nil?
+      Thread.new do
+        users.each do |user|
+          ApplicationMailer.new_project(project, user).deliver
+        end
+      end
+    else
+      attachments[doc.filename] = { mime_type: doc.content_type, content: doc.file_contents }
+      Thread.new do
+        users.each do |user|
+          ApplicationMailer.new_project_with_pdf(project, user.email,
+                                                 user.name, attachments).deliver
+        end
+      end
+    end
+
+
     redirect_to '/dashboard'
   end
 
@@ -85,8 +103,4 @@ class ProjectsController < ApplicationController
       end
     end
   end
-
-  # How to use Sonar DB
-  # Sonar.table_name = 'projects' -> table name
-  # @test = Sonar.all -> query to table
 end

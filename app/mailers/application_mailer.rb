@@ -6,19 +6,19 @@ class ApplicationMailer < ActionMailer::Base
     mail(to: @user.email, subject: 'Welcome')
   end
 
-  def new_project(project)
+  def new_project(project, email, username)
     @project = project
-    @doc = Document.find_by(project_id: @project.id)
-    users = User.where(userType: 2)
-    unless @doc.nil?
-      attachments[@doc.filename] = { mime_type: @doc.content_type, content: @doc.file_contents }
-    end
+    @username = username
+    mail(to: email,
+         subject: 'New project'
+    )
+  end
 
-    users.each do |user|
-      @username = user.name
-      mail(to: user.email,
-           subject: 'New project'
-      )
-    end
+  def new_project_with_pdf(project, email, username, attachments)
+    @project = project
+    @username = username
+    mail(to: email,
+         subject: 'New project'
+    )
   end
 end
