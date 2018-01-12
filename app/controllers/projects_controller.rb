@@ -12,22 +12,23 @@ class ProjectsController < ApplicationController
     project = Project.create(params, current_user)
     doc = Document.find_by(project_id: project.id)
     users = User.where(userType: 2).to_a
+
     if doc.nil?
       Thread.new do
         users.each do |user|
-          ApplicationMailer.new_project(project, user).deliver
+          ApplicationMailer.new_project(project, user.email, user.name).deliver
         end
+        ActiveRecord::Base.connection.close
       end
     else
-      attachments[doc.filename] = { mime_type: doc.content_type, content: doc.file_contents }
       Thread.new do
         users.each do |user|
           ApplicationMailer.new_project_with_pdf(project, user.email,
-                                                 user.name, attachments).deliver
+                                                 user.name, doc).deliver
         end
+        ActiveRecord::Base.connection.close
       end
     end
-
 
     redirect_to '/dashboard'
   end

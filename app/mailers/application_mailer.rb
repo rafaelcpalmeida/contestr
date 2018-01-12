@@ -14,7 +14,8 @@ class ApplicationMailer < ActionMailer::Base
     )
   end
 
-  def new_project_with_pdf(project, email, username, attachments)
+  def new_project_with_pdf(project, email, username, doc)
+    attachments[doc.filename] = { mime_type: doc.content_type, content: doc.file_contents }
     @project = project
     @username = username
     mail(to: email,
