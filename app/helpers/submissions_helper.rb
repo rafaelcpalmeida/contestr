@@ -7,37 +7,37 @@ module SubmissionsHelper
     return_message = ''
     time = 0
 
-    def execute_script(params)
+    execute_script = lambda { |params|
       stdout, _, status = Open3.capture3(params)
       abort 'Error running script' unless status.to_s.split(' ').last == '0'
 
       stdout
-    end
+    }
 
     case file_name.partition('.').last
     when /php/
       time = Benchmark.measure do
-        return_message = execute_script "php #{file_name} #{arguments.join(' ')}"
+        return_message = execute_script.call "php #{file_name} #{arguments.join(' ')}"
       end
     when /c/
       time = Benchmark.measure do
-        execute_script "gcc #{file_name} -o #{file_name.partition('.').first}"
+        execute_script.call "gcc #{file_name} -o #{file_name.partition('.').first}"
 
-        return_message = execute_script "#{file_name.partition('.').first} #{arguments.join(' ')}"
+        return_message = execute_script.call "#{file_name.partition('.').first} #{arguments.join(' ')}"
 
-        execute_script "rm #{file_name.partition('.').first}"
+        execute_script.call "rm #{file_name.partition('.').first}"
       end
     when /java/
       time = Benchmark.measure do
-        execute_script "javac #{file_name}"
+        execute_script.call "javac #{file_name}"
 
-        return_message = execute_script "java #{file_name.partition('.').first} #{arguments.join(' ')}"
+        return_message = execute_script.call "java #{file_name.partition('.').first} #{arguments.join(' ')}"
 
-        execute_script "rm #{file_name.partition('.').first}"
+        execute_script.call "rm #{file_name.partition('.').first}"
       end
     when /py/
       time = Benchmark.measure do
-        return_message = execute_script "python #{file_name} #{arguments.join(' ')}"
+        return_message = execute_script.call "python #{file_name} #{arguments.join(' ')}"
       end
     end
 
