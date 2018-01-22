@@ -1,0 +1,30 @@
+<main>
+  <div class="breadcrumb grey lighten-3">
+    <h6>
+      Dashboard
+    </h6>
+  </div>
+  <br><br>
+  <div class="container">
+    <h4>Posições</h4>
+    <table>
+      <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Posição</th>
+        <th>Tempo de execução</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @positions.each do |c| %>
+        <tr>
+          <td><%= c["name"] %> </td>
+          <td><%= c["pos"] %> </td>
+          <td><%= c["exec_time"] %> </td>
+          <td><%= link_to 'Ver', {:action => 'details', :controller=> 'projects', :id => c["id"]}, class: 'waves-effect waves-light btn' %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</main>
