@@ -29,11 +29,13 @@ class Project < ApplicationRecord
     close_time = DateTime.parse("#{params[:projects][:finish_date]} #{params[:projects][:finish_hour]}")
     formatted_close_time = close_time.strftime("%Y-%m-%d %H:%M:%S")
     project = Project.new(user_id: current_user.id,
-                           title: params[:projects][:name],
-                           description: params[:projects][:description],
-                           openTime: formatted_start_time,
-                           closeTime: formatted_close_time,
-                           languages: get_languages(params).to_json)
+                          title: params[:projects][:name],
+                          description: params[:projects][:description],
+                          arguments: params[:projects][:args],
+                          result: params[:projects][:result],
+                          openTime: formatted_start_time,
+                          closeTime: formatted_close_time,
+                          languages: get_languages(params).to_json)
     project.save
     Document.create(project.id, params[:projects][:file])
     return project

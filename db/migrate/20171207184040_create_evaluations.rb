@@ -6,12 +6,10 @@ class CreateEvaluations < ActiveRecord::Migration[5.1]
       t.string :maintainability
       t.string :security
       t.string :reliability
-      t.string :releasability
       t.string :language
       t.string :build_result
       t.string :run_result
       t.string :execution_time
-      t.string :execution_memory
       t.timestamps
     end
   end

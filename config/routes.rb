@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
   get '/dashboard' => 'dashboard#index'
+  get '/dashboard/positions' => 'dashboard#positions'
   get '/dashboard/closed' => 'dashboard#closed'
   get '/projects/new' => 'projects#new'
   get '/projects/submissions/code' => 'projects#code'
